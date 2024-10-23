@@ -382,6 +382,7 @@ export default function RootLayout({ children }) {
 ### 이미지 컴포넌트 리모트
 
 - pixabay같은 외부 이미지를 사용하려면 next.config.mjs에 URL을 추가해야한다
+``` javascript
 const nextConfig = {
     images : {
         remotePatterns : [
@@ -392,10 +393,14 @@ const nextConfig = {
         ],
     }
 };
-
-
+```
 
 ## 코드 구성과 데이터 불러오기
 
-###
+### 프로젝트를 시작할 때는 확장과 복잡도의 증가에 대비해야 합니다.
+### next.js에서는 특정 파일과 디렉토리가 지정된 위치에 있어야 합니다. (_app.jsx, _document.js 등)
+- node_module/ => 프로젝트의 의존성 패키지 관리
+- pages/ => 라우팅 시스템 관리 
+- public/ => 정적자원 관리 (html, css, js, image 등)
+- styles/ => 스타일링 모듈 관리 (css, sass, less 등)
 
