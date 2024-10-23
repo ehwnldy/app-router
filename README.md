@@ -362,7 +362,7 @@ export default function RootLayout({ children }) {
 
 이렇게 프로젝트 전반적으로 적용될 레이아웃에 공통으로 적용하는 방식이다(컴포넌트도 적용이 가능하다.)
 
-## Link와 a, router.push
+### Link와 a, router.push
 
 - a태그는 동기식으로 페이지 전체가 reload되기 때문에 외부 링크를 통할 때 사용된다. 일반적으로 내부이동 시 사용하지 않는 것이 좋다
 - router.push는 빌드 후 이동할 주소가 html상에 노출되지 않기 때문에 SEO에 취약하다
@@ -371,10 +371,31 @@ export default function RootLayout({ children }) {
 - 내부페이지로 이동할 때 SPA방식으로 비동기식으로 렌더링 된다
 - 그렇기에 내부 이동은 LINK를 사용하는 것이 좋다
 
-## 정적 자원 보관
+### 정적 자원 보관
 
 - 이미지, 아이콘, css, js등의 정적 자원은 /public안에 보관한다
 - 정적자원중 이미지는 SEO에 많은 영향을 미친다
 - 로딩에 많은 시간이 걸리고 로딩 후에도 주변 레이아웃이 변경되는 등 UX관점에서 좋지 않은 영향을 미칩니다.
 - 이를 누적 레이아웃 이동(CLS)라고 합니다
 - 이를 IMAGE컴포넌트를 사용하여 CLS문제를 해결합니다.
+
+### 이미지 컴포넌트 리모트
+
+- pixabay같은 외부 이미지를 사용하려면 next.config.mjs에 URL을 추가해야한다
+const nextConfig = {
+    images : {
+        remotePatterns : [
+            {
+                protocol : "https",
+                hostname : "cdn.pixabay.com",
+            },
+        ],
+    }
+};
+
+
+
+## 코드 구성과 데이터 불러오기
+
+###
+
