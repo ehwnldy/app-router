@@ -404,3 +404,35 @@ const nextConfig = {
 - public/ => 정적자원 관리 (html, css, js, image 등)
 - styles/ => 스타일링 모듈 관리 (css, sass, less 등)
 
+
+## Props 흐름의 이해
+
+### 테스트 하려는 것은 컴포넌트를 호출시 호출된 컴포넌트에서 또다시 다른 컴포넌트를 호출한다면 그 컴포넌트들의 주종관계를 알아보는 것
+### 호출한 컴포넌트는 parent 호출된 컴포넌트는 child, 부모는 자식을 호출할 수 있지만 자식은 그 반대가 불가능하다
+
+export default function ComponentA(){
+    return(
+        <>
+            <h1>ComponentA</h1>
+            <ComponentB></ComponentB>
+        </>
+    )
+}
+
+export default function ComponentB(){
+    return(
+        <>
+            <h1>ComponentB</h1>
+            <ComponentC />
+        </>
+    )
+}
+
+export default function ComponentC(){
+    return(
+        <>
+            <h1>ComponentC</h1>
+            {/* <ComponentA></ComponentA>  A를 호출하는 순간 부모 자식간 호출 규칙에 위반되어 에러가 발생*/ } 
+        </>
+    )
+}

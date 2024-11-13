@@ -1,0 +1,5 @@
+/* global로 사용하는 법(비추천) */
+.main :global{ 
+    text-align: center;
+    color: aqua;
+}
