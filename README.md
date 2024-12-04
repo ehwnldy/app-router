@@ -410,29 +410,52 @@ const nextConfig = {
 ### 테스트 하려는 것은 컴포넌트를 호출시 호출된 컴포넌트에서 또다시 다른 컴포넌트를 호출한다면 그 컴포넌트들의 주종관계를 알아보는 것
 ### 호출한 컴포넌트는 parent 호출된 컴포넌트는 child, 부모는 자식을 호출할 수 있지만 자식은 그 반대가 불가능하다
 
-export default function ComponentA(){
+export default function PropsFlow(){
+    const data = {id : 1 , name : 'works', message : "Hello world"}
+    return(
+        <>        
+            <h1>props-flow</h1>
+            //data(전달받은 컴포넌트에서 표시될 이름) = {data} 현재 컴포넌트에서의 객체
+            <ComponentA data = {data}></ComponentA> 
+           
+        </>
+    )
+}
+
+export default function ComponentA({data}){
     return(
         <>
             <h1>ComponentA</h1>
-            <ComponentB></ComponentB>
+            <h2>props-flow 에서 {data.name}를 받아옴</h2>
+            <ComponentB data={data}></ComponentB>
+            
         </>
     )
 }
 
-export default function ComponentB(){
+export default function ComponentB({data}){
     return(
         <>
             <h1>ComponentB</h1>
-            <ComponentC />
+            <h2>props-flow - ComponentA 에서 {data.id}</h2>
+            <ComponentC data={data} />
         </>
     )
 }
 
-export default function ComponentC(){
+export default function ComponentC({data}){
     return(
         <>
             <h1>ComponentC</h1>
+            <h2> props-flow - ComponentA - ComponentB 에서 {data.message}</h2>
             {/* <ComponentA></ComponentA>  A를 호출하는 순간 부모 자식간 호출 규칙에 위반되어 에러가 발생*/ } 
         </>
     )
 }
+
+## Context API
+
+### Context API는 UI구축에 많이 사용하는 react의 기능입니다.
+### 일반적으로 props는 부모에서 자식으로의 단방향 통신을 합니다
+### 애플리케이션 안의 여러 컴포넌트들에 전해줘야 하는 props의 경우 (예를 들면 선호 로케일, UI 테마) 이 과정이 번거로울 수 있습니다. context를 이용하면, 트리 단계마다 명시적으로 props를 넘겨주지 않아도 많은 컴포넌트가 이러한 값을 공유하도록 할 수 있습니다.(전역적 사용)
+
